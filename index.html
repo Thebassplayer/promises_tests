@@ -13,11 +13,28 @@
 
 <body>
   <h1>Promises tests</h1>
-  <button id="btn">Generate new user</button>
-  <div id="user-container" class="user-container">
-    <h2 id="request-method"></h2>
-    <h3 id="user-name"></h3>
+  <div class="main">
+    <div class="selector">
+      <form>
+        <label for="cars">Select a request method:</label>
+        <select id="requests-selector" name="requests">
+          <option value="fetch">Fetch in eventListener</option>
+          <option value="fetch-helper">Fetch with helper function</option>
+          <option value="async-fetch">Async-fetch in eventListener</option>
+          <option value="async-fetch-helper">Async fetch with helper function</option>
+          <option value="axios">Axios in eventListener</option>
+          <option value="axios-helper">Axios with helper function</option>
+        </select>
+      </form>
+      <button id="btn" class="btn" type="submit">Generate new user</button>
+    </div>
+
+    <div id="user-container" class="user-container">
+      <h2 id="request-method"></h2>
+      <h3 id="user-name"></h3>
+    </div>
   </div>
+
 </body>
 
 </html>
