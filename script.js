@@ -1,15 +1,12 @@
-const user = document.getElementById('user');
-const button = document.getElementById('btn');
-const userContainer = document.getElementById('user-container');
-const requestMethod = document.getElementById('request-method');
-const userName = document.getElementById('user-name');
-const requestSelector = document.getElementById('requests-selector');
-const apiURL = 'https://randomuser.me/api/';
+const button = document.getElementById('btn'),
+  userNameEl = document.getElementById('user-name'),
+  requestSelector = document.getElementById('requests-selector'),
+  apiURL = 'https://randomuser.me/api/';
 
 //! Event listener
 button.addEventListener('click', () => {
   const requestSelectorValue = requestSelector.value;
-  console.log(requestSelectorValue);
+  console.log('Log 1:', requestSelectorValue);
   switch (requestSelectorValue) {
     case 'fetch':
       fetchInEventListener(apiURL);
@@ -35,9 +32,8 @@ button.addEventListener('click', () => {
 });
 
 //! Node generator
-function nodeGenerator(data, method) {
-  requestMethod.innerText = `Request method: ${method}`;
-  userName.innerText = `Request result: ${data}`;
+function nodeGenerator(data) {
+  userNameEl.innerText = `Request result: ${data}`;
 }
 
 // //? Version 1 (fetch request inside eventListener)
@@ -47,8 +43,8 @@ const fetchInEventListener = (url) => {
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
-      const userData = data.results[0].name.first;
-      nodeGenerator(userData, 'Fetch in eventListener');
+      const userName = data.results[0].name.first;
+      nodeGenerator(userName);
     });
 };
 
@@ -72,8 +68,8 @@ function fetchData(url) {
 //! Event listener (With helper function <fetchData>)
 const fetchWithHelperFunc = (url) => {
   fetchData(url).then((data) => {
-    const userData = data.results[0].name.first;
-    nodeGenerator(userData, 'Fetch - Helper Function');
+    const userName = data.results[0].name.first;
+    nodeGenerator(userName);
   });
 };
 
@@ -83,8 +79,8 @@ const fetchWithHelperFunc = (url) => {
 const asyncFetch = async (url) => {
   const res = await fetch(url);
   const data = await res.json();
-  const userData = data.results[0].name.first;
-  nodeGenerator(userData, 'Fetch inside eventListener');
+  const userName = data.results[0].name.first;
+  nodeGenerator(userName);
 };
 
 //? Version 4 (fetch request with helper function using async)
@@ -105,8 +101,8 @@ const FetchAsyncdata = async (url) => {
 //! Event listener
 const asyncFetchInHelper = (url) => {
   FetchAsyncdata(url).then((data) => {
-    const userData = data.results[0].name.first;
-    nodeGenerator(userData, 'Fetch - Helper Function - Async');
+    const userName = data.results[0].name.first;
+    nodeGenerator(userName);
   });
 };
 
@@ -115,17 +111,15 @@ const asyncFetchInHelper = (url) => {
 //! Event listener
 const axiosRequest = async (url) => {
   const res = await axios.get(url);
-  console.log('Log axios 1 :', res);
-  const userData = res.data.results[0].name.first;
-  console.log('Log axios 2 :', userData);
-  nodeGenerator(userData, 'Axios inside eventListener');
+  const userName = res.data.results[0].name.first;
+  nodeGenerator(userName);
 };
 
 //? Version 6 (fetch request with helper function using AXIOS & async)
 
 //! Helper Function
 const axiosData = async (url) => {
-  const data = await axios.get(apiURL);
+  const data = await axios.get(url);
   return new Promise((resolve, reject) => {
     if (data) {
       resolve(data);
@@ -138,9 +132,9 @@ const axiosData = async (url) => {
 //! Event listener
 const axiosWithHelper = (url) => {
   axiosData(url).then((data) => {
-    const userData = data.data.results[0].name.first;
-    console.log(userData);
-    nodeGenerator(userData, 'Axios - Helper Function - Async');
+    const userName = data.data.results[0].name.first;
+    console.log(userName);
+    nodeGenerator(userName);
   });
 };
 
