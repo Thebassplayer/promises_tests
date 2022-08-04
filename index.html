@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src='https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js' defer></script>
   <script src='./script.js' defer></script>
   <style>
     body {
@@ -14,6 +15,14 @@
     .user-container {
       margin-top: 40px;
     }
+
+    .user-container h2 {
+      border: 2px solid DodgerBlue;
+    }
+
+    .user-container h3 {
+      border: 2px solid coral;
+    }
   </style>
   <title>Promises test</title>
 </head>
@@ -21,7 +30,8 @@
 <body>
   <h1>Promises tests</h1>
   <button id="btn">Generate new user</button>
-  <div id="user-container" class="user">
+  <div id="user-container" class="user-container">
+    <h2 id="request-method"></h2>
     <h3 id="user-name"></h3>
   </div>
 </body>
