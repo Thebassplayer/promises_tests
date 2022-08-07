@@ -6,10 +6,10 @@ const button = document.getElementById('btn'),
 //! Event listener
 button.addEventListener('click', () => {
   const requestSelectorValue = requestSelector.value;
-  console.log('Log 1:', requestSelectorValue);
+
   switch (requestSelectorValue) {
     case 'fetch':
-      fetchInEventListener(apiURL);
+      fetchThenCatch(apiURL);
       break;
     case 'fetch-helper':
       fetchWithHelperFunc(apiURL);
@@ -36,17 +36,17 @@ function nodeGenerator(data) {
   userNameEl.innerText = `Request result: ${data}`;
 }
 
-// //? Version 1 (fetch request inside eventListener)
+// //? Version 1 (fetch with then() and catch() statements)
 
-//! Event listener
-const fetchInEventListener = (url) => {
+function fetchThenCatch(url) {
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
       const userName = data.results[0].name.first;
       nodeGenerator(userName);
-    });
-};
+    })
+    .carch((err) => new Error(`Error Status: ${err}`));
+}
 
 //? Version 2 (fetch request with helper function)
 
